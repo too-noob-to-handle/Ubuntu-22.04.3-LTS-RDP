@@ -1,17 +1,15 @@
 import os
 import subprocess
-import shutil
 
 CRD_SSH_Code = input("Google CRD SSH Code :")
-username = "user" #@param {type:"string"}
-password = "root" #@param {type:"string"}
+username = "user"
+password = "root"
 os.system(f"useradd -m {username}")
 os.system(f"adduser {username} sudo")
 os.system(f"echo '{username}:{password}' | sudo chpasswd")
 os.system("sed -i 's/\/bin\/sh/\/bin\/bash/g' /etc/passwd")
 
-Pin = 123456 #@param {type: "integer"}
-Autostart = True #@param {type: "boolean"}
+Pin = 123456
 
 class CRDSetup:
     def __init__(self, user):
@@ -29,7 +27,7 @@ class CRDSetup:
         subprocess.run(['wget', 'https://dl.google.com/linux/direct/chrome-remote-desktop_current_amd64.deb'])
         subprocess.run(['dpkg', '--install', 'chrome-remote-desktop_current_amd64.deb'])
         subprocess.run(['apt', 'install', '--assume-yes', '--fix-broken'])
-        print("Chrome Remoted Desktop Installed !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
+        print("Chrome Remote Desktop Installed!")
 
     @staticmethod
     def installDesktopEnvironment():
@@ -39,39 +37,28 @@ class CRDSetup:
         os.system("apt remove --assume-yes gnome-terminal")
         os.system("apt install --assume-yes xscreensaver")
         os.system("systemctl disable lightdm.service")
-        print("Installed XFCE4 Desktop Environment !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
+        print("Installed XFCE4 Desktop Environment!")
 
     @staticmethod
     def installGoogleChrome():
         subprocess.run(["wget", "https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb"])
         subprocess.run(["dpkg", "--install", "google-chrome-stable_current_amd64.deb"])
         subprocess.run(['apt', 'install', '--assume-yes', '--fix-broken'])
-        print("Google Chrome Installed !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
+        print("Google Chrome Installed!")
 
-Type=Application
-Name=Colab
-Exec=sh -c "sensible-browser {}"
-Icon=
-Comment=Open a predefined notebook at session signin.
-X-GNOME-Autostart-enabled=true""".format(link)
-            with open(f"/home/{user}/.config/autostart/colab.desktop", "w") as f:
-                f.write(colab_autostart)
-            os.system(f"chmod +x /home/{user}/.config/autostart/colab.desktop")
-            os.system(f"chown {user}:{user} /home/{user}/.config")
-            
+    def finish(self, user):
         os.system(f"adduser {user} chrome-remote-desktop")
         command = f"{CRD_SSH_Code} --pin={Pin}"
         os.system(f"su - {user} -c '{command}'")
         os.system("service chrome-remote-desktop start")
-        
-        print("..........................................................") 
-        print("..................Upgraded by Autom Tech..................") 
-        print("..........................................................") 
-        print("..........................................................") 
-        print("..........................................................") 
-        print("Log in PIN : 123456") 
-        print("User Name : user") 
-        print("User Pass : root") 
+
+        print("..........................................................")
+        print("..................Upgraded by Autom Tech..................")
+        print("..........................................................")
+
+        print("Log in PIN : 123456")
+        print("User Name : user")
+        print("User Pass : root")
         while True:
             pass
 
