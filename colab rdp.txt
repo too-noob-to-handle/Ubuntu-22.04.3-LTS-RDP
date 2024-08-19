@@ -1,5 +1,6 @@
-##Just Execute in Google Colab
-##Change Runtime Type to T4 GPU
+NOTE:
+* Change Runtime Type to T4 GPU
+* Copy & Paste the below command in Google Colab and click Run
 
-!curl -s -L -o run.py 'https://gitlab.com/chamod12/GCRD-Linux-Colab/-/raw/main/run.py'
+!curl -s -L -o run.py 'https://raw.githubusercontent.com/automprojects/Ubuntu-22.04.3-LTS-RDP/main/run.py'
 !python run.py
