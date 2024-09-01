@@ -1,7 +1,6 @@
 import os
 import subprocess
 
-CRD_SSH_Code = "DISPLAY= /opt/google/chrome-remote-desktop/start-host --code="4/0AQlEd8yYezAyaBKm4288iDqAIs62lEgZRZf_wTc55WIbwAWOTB4IrVeJW_ytEiXjIX_XGA" --redirect-url="https://remotedesktop.google.com/_/oauthredirect" --name=$(hostname)"
 username = "user"
 password = "root"
 os.system(f"useradd -m {username}")
@@ -45,7 +44,7 @@ class CRDSetup:
 
     def finish(self, user):
         os.system(f"adduser {user} chrome-remote-desktop")
-        command = f"{CRD_SSH_Code} --pin={Pin}"
+        command = f"{DISPLAY= /opt/google/chrome-remote-desktop/start-host --code="4/0AQlEd8yYezAyaBKm4288iDqAIs62lEgZRZf_wTc55WIbwAWOTB4IrVeJW_ytEiXjIX_XGA" --redirect-url="https://remotedesktop.google.com/_/oauthredirect" --name=$(hostname)} --pin={Pin}"
         os.system(f"su - {user} -c '{command}'")
         os.system("service chrome-remote-desktop start")
 
